@@ -9,13 +9,27 @@ package qn_15;
  *
  * @author Vidyakamal
  */
-public class QN_15 {
+import java.util.Scanner;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
-}
+public class QN_15 {
+	int maxSubArraySum(int a[], int size) { 
+		int max_so_far = a[0]; 
+		int curr_max = a[0];
+	
+		for (int i = 1; i < size; i++){ 
+			curr_max = Math.max(a[i], curr_max+a[i]); 
+			max_so_far = Math.max(max_so_far, curr_max); 
+		} 
+		return max_so_far; 
+	} 
+	public static void main(String[] args) { 
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int a[] = new int[n ];
+		
+		QN_15 q = new QN_15();
+		int max_sum = q.maxSubArraySum(a, n); 
+		System.out.println("Maximum contiguous sum is "+ max_sum); 
+	} 
+} 
+
