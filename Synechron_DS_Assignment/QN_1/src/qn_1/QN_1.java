@@ -7,164 +7,104 @@ package qn_1;
 
 import java.util.Scanner;
 
-class Node
-{
-  int data;
-  Node next;
-    Node (int data)
-  {
-    this.data = data;
-    this.next = null;
-  }
-}
-class LinkedList
-{
-  Node head;
-  private int length;
+/*
+========================================================
+Design a stack that supports getMin() in O(1) time and O(1) auxiliary space.
+========================================================
+*/
+class Stack_min 
+{ 
+	Stack<Integer> s; 
+	Integer minValue; 
 
-    LinkedList ()
-  {
-    this.length = 0;
-  }
+	Stack_min() { s = new Stack<Integer>(); } 
 
-  LinkedList (int data)
-  {
-    this.head = new Node (data);
-    length++;
-  }
+	void getMin() 
+	{ 
+		if (s.isEmpty()) 
+			System.out.println("Stack is empty"); 
+		else
+			System.out.println("Minimum Element  " + minValue); 
+	} 
+	void peek() 
+	{ 
+		if (s.isEmpty()) 
+		{ 
+			System.out.println("Stack is empty "); 
+			return; 
+		} 
 
-  public int getLength ()
-  {
-    return length;
-  }
+		Integer temp = s.peek(); 
+		System.out.print("Top Element: "); 
+ 
+		if (temp < minValue) 
+			System.out.println(minValue); 
+		else
+			System.out.println(temp); 
+	} 
 
-  public Node getHead ()
-  {
-    return head;
-  }
+	void pop() 
+	{ 
+		if (s.isEmpty()) 
+		{ 
+			System.out.println("Stack is empty"); 
+			return; 
+		} 
 
-  void insertAtBigin (int data)
-  {
-    Node NewNode = new Node (data);
-    if (length == 0)
-      {
-	head = NewNode;
-	length++;
-	return;
-      }
-    NewNode.next = head;
-    head = NewNode;
-    length++;
-  }
+		System.out.print("Removed: "); 
+		Integer temp = s.pop(); 
+		if (temp < minValue) 
+		{ 
+			System.out.println(minValue); 
+			minValue = 2*minValue - temp; 
+		} 
 
-  public void PrintList ()
-  {
-    Node temp = this.head;
-    while (temp != null)
-      {
-	System.out.print (temp.data + " ");
-	temp = temp.next;
-      }
-  }
+		else
+			System.out.println(temp); 
+	} 
 
-  public void add (int data)
-  {
-    Node node = new Node (data);
-    if (head == null)
-      {
-	head = node;
-	length++;
-      }
-    else
-      {
-	Node temp = head;
-	while (temp.next != null)
-	  temp = temp.next;
-	temp.next = node;
-	length++;
-      }
-  }
+	void push(Integer x) 
+	{ 
+		if (s.isEmpty()) 
+		{ 
+			minValue = x; 
+			s.push(x); 
+			System.out.println("Inserted: " + x); 
+			return; 
+		} 
+		if (x < minValue) 
+		{ 
+			s.push(2*x - minValue); 
+			minValue = x; 
+		} 
 
-  public String ToString ()
-  {
-    String result = "[";
-    if (head == null)
-      return result + "]";
-    result += head.data;
-    Node Temp = head.next;
-    while (Temp != null)
-      {
-	result += "," + Temp.data;
-	Temp = Temp.next;
-      }
-    return result + "]";
-  }
+		else
+			s.push(x); 
 
-  void insetAt (int p, int data)
-  {
-    Node NewNode = new Node (data);
-    Node preNode = head;
-    if (p == 0)
-      {
-	NewNode.next = head;
-	head = NewNode;
-	length++;
-	return;
-      }
-    for (int i = 1; i < p; i++)
-      {
-	preNode = preNode.next;
-      }
-    NewNode.next = preNode.next;
-    preNode.next = NewNode;
-    length++;
-  }
-  void deletAtEnd(){
-        Node preNode=head,Temp=head;
-        while(Temp.next != null){
-            preNode=Temp;
-            Temp=Temp.next;
-        }
-        preNode.next=null;
-        length--;
-    }
-void deletAtBeging(){
-        if(length==0){
-            System.out.print("Empty List");
-        }
-        else{
-        head = head.next;
-        length--;
-        }
-    }
-    void deletAt(int p){
-    Node preNode=head,Temp=head;
-        while(p >= 0){
-            preNode=Temp;
-            Temp=Temp.next;
-            p--;
-        }
-        preNode.next=null;
-        length--;
-    }
-}
+		System.out.println("Inserted: " + x); 
+	} 
+}; 
 
-public class QN_1 {
+public class QN_1 
+{ 
+	public static void main(String[] args) 
+	{ 
+		Stack_min s = new Stack_min(); 
+		s.push(3); 
+		s.push(5); 
+		s.getMin(); 
+		s.push(2); 
+		s.push(1); 
+		s.push(8); 
+		s.getMin(); 
+		s.pop(); 
+		s.getMin();
+		s.pop(); 
+		s.getMin(); 
+		s.pop(); 
+		s.getMin(); 
+		s.pop(); 
+		s.getMin(); 
+	} 
+} 
 
-    public static void main(String[] args) {
-        
-      Scanner sc = new Scanner (System.in);
-      LinkedList list = new LinkedList (12);
-      list.add (4);
-      list.add (6);
-      list.add (10);
-      list.add (8);
-      list.PrintList();
-      System.out.println ("ToString: "+list.ToString ());
-      System.out.println ("length: "+list.getLength ());
-      list.deletAtBeging();
-      System.out.println ("ToString: "+list.ToString ());
-      System.out.println ("length: "+list.getLength ());
-    }
-    
-}
