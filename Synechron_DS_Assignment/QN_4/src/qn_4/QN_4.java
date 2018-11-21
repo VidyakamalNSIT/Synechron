@@ -93,7 +93,7 @@ class QN_4 {
 		list1.DetectLoop();
 		list1.print();
 	// Condition Input for Loop
-	    GFG list = new GFG(); 
+	    QN_4 list = new QN_4(); 
         list.head = new Node(50); 
         list.head.next = new Node(20); 
         list.head.next.next = new Node(15); 
