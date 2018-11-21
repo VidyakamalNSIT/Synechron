@@ -9,13 +9,66 @@ package qn_9;
  *
  * @author Vidyakamal
  */
-public class QN_9 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+import java.util.*;
+class Node{
+    int data;
+    Node next;
+    Node (int data){
+        this.data = data;
+        this.next = null;
     }
-    
+}
+class QN_9 {
+    static Node head;
+    private int length;
+    QN_9 (){
+        this.length = 0;
+    }
+
+    QN_9 (int data){
+        this.head = new Node (data);
+        length++;
+    }
+    public void add (int data){
+        Node node = new Node (data);
+        if (head == null){
+        	head = node;
+        	length++;
+        }
+        else{
+        	Node temp = head;
+        	while (temp.next != null)
+        	temp = temp.next;
+        	temp.next = node;
+        	length++;
+        }
+    }
+
+    String check(){
+        Node temp = head;
+        Stack<Integer> St = new Stack<>();
+        while(temp!=null){
+            St.push(temp.data);
+            temp = temp.next;
+        }
+        temp = head;
+        while(temp != null){
+            if(temp.data != St.pop()){
+                return "NOT palindrome";
+                
+            }
+            temp = temp.next;
+        }
+        return "palindrome";
+    }
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int len = sc.nextInt();
+		QN_9 list = new QN_9();
+		while(len-->0){
+		    list.add(sc.nextInt());
+		}
+		System.out.println(list.check());
+	}
 }
