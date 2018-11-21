@@ -89,7 +89,7 @@ public class QN_8 {
                 System.out.println("Pop=1 or push=2");
                 int ch2= sc.nextInt();
                 if(ch2==1)
-                System.out.println(obj.pop_1);
+                System.out.println(obj.pop_1());
                 else
                 obj.push_1(sc.nextInt());
             }
@@ -97,7 +97,7 @@ public class QN_8 {
                 System.out.println("Pop=1 or push=2");
                 int ch3= sc.nextInt();
                 if(ch3==1)
-                System.out.println(obj.pop_2);
+                System.out.println(obj.pop_2());
                 else
                 obj.push_2(sc.nextInt());
             }
